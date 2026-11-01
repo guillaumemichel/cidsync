@@ -99,17 +99,21 @@ The scan walks `dir`. A file's path below `dir` is its URL below `base`.
   path, one without matches a name at any depth (`*.tmp`). A symlinked
   file is followed, a symlinked directory is not, a broken link is left
   out with a warning.
-- **A packed file** `X`, with `X.proofs/root` beside it
-  ([veritiles](https://github.com/guillaumemichel/veritiles)), is
-  published as two CIDs, and `X` is never read: the anchor, the CID of the
-  descriptor `X.proofs/root`, at that path; and the map CID the descriptor
-  names, at `X`, with the size the descriptor gives. A descriptor veritiles
-  would refuse is left out with a warning. While `X` is not the size its
-  descriptor gives, or `X.proofs/` has no `root`, a copy or a packing is
-  under way, and both wait. The shards are not published: clients find
-  them beside `root`.
-- **Any other file** is published as its raw sha2-256 CID, the CID
-  veritiles reads a raw asset by.
+- **A packed file** `X`, with `X.proofs/root` beside it (an anymirror
+  [ranged file][ranged]), is published as two CIDs, and `X` is never read:
+  the anchor, the CID of the descriptor `X.proofs/root`, at that path; and
+  the map CID the descriptor names, at `X`, with the size the descriptor
+  gives. A descriptor an anymirror reader would refuse
+  ([§2.1][descriptor]) is left out with a warning. While `X` is not the
+  size its descriptor gives, or `X.proofs/` has no `root`, a copy or a
+  packing is under way, and both wait. The shards are not published:
+  clients find them beside `root`.
+- **Any other file** is published as its raw sha2-256 CID, the CID an
+  anymirror reader reads a [raw asset][raw] by.
+
+[ranged]: https://github.com/anymirror-dev/anymirror/blob/main/SPEC.md#2-ranged-files
+[descriptor]: https://github.com/anymirror-dev/anymirror/blob/main/SPEC.md#21-descriptor
+[raw]: https://github.com/anymirror-dev/anymirror/blob/main/SPEC.md#31-raw-assets
 
 A CID found at several paths gets them all, sorted, up to 16: the index
 keeps 16. Each path segment is percent-encoded, `:` included, so that a
